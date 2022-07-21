@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Çevrimiçi Sohbet</title>
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.1/socket.io.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+</head>
+<body>
+
+
+    <div class="container chatpanel">
+
+    <h4>Çevrimiçi Sohbet</h4>
+    <p class="text-muted mb-3">Sistemde bulunan tüm kullanıcılar ile sohbet edebileceğiniz panel!</p>
+
+        <div id="messages">
+            <div class="message system">
+                <i class="fa-solid fa-triangle-exclamation"></i> Kullanıcılara nazik davranmamanız kalıcı olarak yasaklanmanıza neden olabilir.
+            </div>
+
+            <div class="message user">
+                <strong><%=username%>:</strong> Sohbete katıldı.
+            </div>
+
+        </div>
+
+        <div class="message-bar">
+
+            <input type="text" class="post_input" id="message" placeholder="<%=username%>, ne düşünüyorsun?">
+            <input type="hidden" id="username" value="<%=username%>">
+        </div>
+
+
+    </div>
+
+
+<script src="/assets/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/js/bootstrap.min.js"></script>
+    <script src="/assets/js/main.js"></script>
+</body>
+</html>

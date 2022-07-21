@@ -1,0 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@500&display=swap');
+
+* {
+    font-family: "Open Sans", sans-serif;
+}
+
+body {
+    background-color: #eee;
+}
+
+.chatpanel {
+    max-width: 500px;
+    margin-top: 2%;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.message {
+    display: block;
+    padding: 10px;
+    border-radius: 4px;
+    color: #fff;
+    word-wrap: break-word;
+}
+
+.post_input:disabled {
+    background-color: #c3c9d0;
+}
+
+
+.system {
+    background-color: #d2d6de;
+    margin-bottom: 10px;
+    color: #475569
+
+}
+
+.user {
+    background-color: #36b47d;
+    margin-bottom: 10px;
+}
+
+strong {
+    background-color: #fff;
+    padding: 5px;
+    border-radius: 4px;
+    color: #858585 !important;
+    margin-right: 10px;
+}
+
+.post_input {
+    width: 100%;
+    border: none;
+    padding: 8px;
+    background-color: #eee;
+    outline: none;
+    border-radius: 3px;
+}
+
