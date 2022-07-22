@@ -36,7 +36,7 @@ app.get('/', async (req, res) => {
     if (!req.query) return res.redirect("/?username="+ username)
     if (req.query.key && req.query.key == "file_uploaded") {
         if (!req.query.source) return res.redirect("/")
-        if (!req.query.username) {
+        if (!req.query.username || req.query.username > 10) {
            return res.redirect("/?key=file_uploaded&source="+ req.query.source+"&username=" + username)
         }
        return res.render("index", { username: req.query.username, source: req.query.source, fileuploaded: true })
