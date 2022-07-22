@@ -10,7 +10,7 @@ app.set('view engine', 'ejs')
 app.use(express.static("public"))
 app.use(upload())
 var server = app.listen(process.env.PORT || 1337, () => {
-    mongoose.connect(process.env.MONGO || "mongodb+srv://void:spfjkUCNgV1ZGrj1@chatapp.ge35sem.mongodb.net/onlinechat?retryWrites=true&w=majority")
+    mongoose.connect(process.env.MONGO || "")
     console.log("Sunucu başlatıldı.")
 })
 
@@ -36,10 +36,14 @@ app.get('/', async (req, res) => {
     if (!req.query) return res.redirect("/?username="+ username)
     if (req.query.key && req.query.key == "file_uploaded") {
         if (!req.query.source) return res.redirect("/")
-        if (!req.query.username || req.query.username > 10) {
+        if (!req.query.username) {
            return res.redirect("/?key=file_uploaded&source="+ req.query.source+"&username=" + username)
         }
-       return res.render("index", { username: req.query.username, source: req.query.source, fileuploaded: true })
+        if (req.query.username > 10) {
+            return res.redirect("/?key=file_uploaded&source="+ req.query.source+"&username=" + username)
+        }
+
+        return res.render("index", { username: req.query.username, source: req.query.source, fileuploaded: true })
     }
     if (!req.query.username || req.query.username.length > 10) return res.redirect("/?username="+ username)
     res.render("index", { username: req.query.username, source: '', fileuploaded: false })
