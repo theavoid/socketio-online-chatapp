@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="/assets/css/main.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.1/socket.io.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.17/dist/sweetalert2.all.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/push.js/1.0.8/push.min.js"></script>
 </head>
 <body>
 
@@ -20,19 +22,53 @@
     <p class="text-muted mb-3">Sistemde bulunan tüm kullanıcılar ile sohbet edebileceğiniz panel!</p>
 
         <div id="messages">
-            <div class="message system">
-                <i class="fa-solid fa-triangle-exclamation"></i> Kullanıcılara nazik davranmamanız kalıcı olarak yasaklanmanıza neden olabilir.
-            </div>
+            <% if (fileuploaded == true) { %>
+                <div class="message fileupload_alert">
+                    <i class="fa-solid fa-upload"></i> Dosyanız başarıyla yüklendi.
+                </div>
+            <% } %>
 
-            <div class="message user">
-                <strong><%=username%>:</strong> Sohbete katıldı.
-            </div>
+                <% if (fileuploaded == false) { %>
+                    <div class="message system">
+                        <i class="fa-solid fa-triangle-exclamation"></i> Kullanıcılara nazik davranmamanız kalıcı olarak yasaklanmanıza neden olabilir.
+                    </div>
+                <% } %>
+
+                <% if (fileuploaded == false) { %>
+
+                <div class="author"><%=username%></div>
+                <div class="message user">
+                    sohbete uçarak giriş yaptı!
+                </div>
+
+            <% } %>
+
+                <% if (fileuploaded == true) { %>
+                <div class="author"><i class="fa-solid fa-camera"></i> photobot</div>
+
+                <div class="message user" style="overflow: hidden; background: #ced4da !important">
+                    <img class="chat_image" onclick="window.open('/uploads/<%=source%>')" onerror="javascript:void(0)" height="250" style="margin-top: 20px; border-radius: 6px" src="/uploads/<%=source%>">                </div>
+
+                <% } %>
+
 
         </div>
 
         <div class="message-bar">
 
-            <input type="text" class="post_input" id="message" placeholder="<%=username%>, ne düşünüyorsun?">
+            <div class="row">
+
+                <div class="col-md-9">
+                    <input type="text" class="post_input" id="message" placeholder="<%=username%>, ne düşünüyorsun?">
+
+                </div>
+                <div class="col-md-3">
+                    <form action="/api/upload" id="fileform" method="post" enctype="multipart/form-data">
+                        <input class="file_upload" id="fileupload" name="file" type="file">
+                    </form>
+                </div>
+            </div>
+
             <input type="hidden" id="username" value="<%=username%>">
         </div>
 
@@ -43,5 +79,15 @@
 <script src="/assets/js/bootstrap.bundle.min.js"></script>
 <script src="/assets/js/bootstrap.min.js"></script>
     <script src="/assets/js/main.js"></script>
+    <script>
+        if ("<%=fileuploaded%>" == "true") {
+            Swal.fire({
+                icon: 'success',
+                title: 'Dosya Yüklendi!',
+                text: 'Dosya başarıyla yüklendi!',
+                confirmButtonText: 'Tamam'
+            })
+        }
+    </script>
 </body>
 </html>
