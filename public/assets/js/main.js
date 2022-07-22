@@ -40,7 +40,7 @@ message.addEventListener("keypress", function (key) {
            return document.getElementById('messages').appendChild(newmessage)
         }
         Push.create(data.sender, {
-            body: data.message.slice(0, 50)+'...',
+            body: data.message.slice(0, 50)+ data.message.length > 50 ? '...' : '',
             timeout: 2000,
             onClick: function () {
                 window.focus();
