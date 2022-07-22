@@ -4,8 +4,6 @@ const socket = require("socket.io")
 const { uniqueNamesGenerator, adjectives } = require('unique-names-generator');
 const axios = require("axios")
 const mongoose = require("mongoose")
-const Bans = require("./models/bans.js")
-const Users = require("./models/users.js")
 const upload = require("express-fileupload")
 
 app.set('view engine', 'ejs')
