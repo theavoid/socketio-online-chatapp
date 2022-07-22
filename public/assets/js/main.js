@@ -23,7 +23,7 @@ message.addEventListener("keypress", function (key) {
 })
 
     socket.on('chat', (data) => {
-        if (data.sender == "photobot") {
+        if (data.sender == "photobot-c267egd6y42wwsfsdgw") {
             Push.create(data.sender, {
                 body: data.sender + ' bir fotoğraf gönderdi.',
                 icon: data.url,
@@ -40,7 +40,7 @@ message.addEventListener("keypress", function (key) {
            return document.getElementById('messages').appendChild(newmessage)
         }
         Push.create(data.sender, {
-            body: data.message.slice(0, 50),
+            body: data.message.slice(0, 50)+ data.message.length > 50 ? '...' : '',
             timeout: 2000,
             onClick: function () {
                 window.focus();
