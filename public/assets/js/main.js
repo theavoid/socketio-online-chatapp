@@ -6,7 +6,6 @@ const message = document.getElementById("message")
 
 message.addEventListener("keypress", function (key) {
     if (key.keyCode == 13) {
-        if (localStorage.getItem("1ppPa8K92sliLlvLMvTl")) return;
         socket.emit('chat', {
             sender: sender,
             message: message.value
@@ -24,14 +23,44 @@ message.addEventListener("keypress", function (key) {
 })
 
     socket.on('chat', (data) => {
+        if (data.sender == "photobot") {
+            Push.create(data.sender, {
+                body: data.sender + ' bir fotoğraf gönderdi.',
+                icon: data.url,
+                timeout: 2000,
+                onClick: function () {
+                    window.focus();
+                    this.close();
+                }
+            });
+
+            let newmessage = document.createElement('div')
+            newmessage.className = "message system"
+            newmessage.innerHTML = '<strong> <i class="fa-solid fa-camera"></i> '+ data.sender +':</strong> ' + data.message;
+           return document.getElementById('messages').appendChild(newmessage)
+        }
+        Push.create(data.sender, {
+            body: data.message.slice(0, 50)+'...',
+            timeout: 2000,
+            onClick: function () {
+                window.focus();
+                this.close();
+            }
+        });
+
         let newmessage = document.createElement('div')
         newmessage.className = "message user"
-        newmessage.innerText = '<strong>'+ data.sender +':</strong> ' + data.message;
+        newmessage.innerText =  data.message;
+        let authorMessage = document.createElement("div")
+        authorMessage.innerText = data.sender
+        authorMessage.className = "author"
+        document.getElementById('messages').appendChild(authorMessage)
         newmessage.style.backgroundColor = "#" + data.color
         document.getElementById('messages').appendChild(newmessage)
 
         const div = document.getElementById("messages");
-        const list = div.querySelectorAll(".user");
+        const list = div.querySelectorAll(".message");
+        const list1 = div.querySelectorAll(".author");
 
         if (list.length > 10) {
             let newmessage = document.createElement('div')
@@ -42,15 +71,17 @@ message.addEventListener("keypress", function (key) {
                 list[i].remove()
 
             }
+            for (let i = 0; i < list1.length; i++) {
+                list1[i].remove()
+
+            }
+
         }
+
     })
 
-    socket.on("banned", (data) => {
-        setTimeout(async () => {
-            message.value = ""
-            message.disabled = true;
-            message.placeholder = "Kalıcı olarak engellendiniz."
+document.getElementById("fileupload").onchange = function () {
+    document.getElementById("fileform").submit();
+}
 
-        }, 5000)
-    })
 
