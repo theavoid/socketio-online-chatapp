@@ -29,6 +29,20 @@ message.addEventListener("keypress", function (key) {
         newmessage.innerText = '<strong>'+ data.sender +':</strong> ' + data.message;
         newmessage.style.backgroundColor = "#" + data.color
         document.getElementById('messages').appendChild(newmessage)
+
+        const div = document.getElementById("messages");
+        const list = div.querySelectorAll(".user");
+
+        if (list.length > 10) {
+            let newmessage = document.createElement('div')
+            newmessage.className = "message system"
+            newmessage.innerHTML = '<strong><i class="fa-solid fa-certificate"></i> sistem:</strong> Çok sayıda mesaj olduğundan dolayı mesajlar sıfırlandı.';
+            document.getElementById('messages').appendChild(newmessage)
+            for (let i = 0; i < list.length; i++) {
+                list[i].remove()
+
+            }
+        }
     })
 
     socket.on("banned", (data) => {
