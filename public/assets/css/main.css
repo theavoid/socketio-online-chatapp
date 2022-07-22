@@ -10,11 +10,12 @@ body {
 }
 
 .chatpanel {
-    max-width: 500px;
+    max-width: 550px;
     margin-top: 2%;
     background-color: #fff;
     padding: 20px;
     border-radius: 5px;
+    margin-bottom: 2%;
 }
 
 .message {
@@ -59,3 +60,50 @@ strong {
     border-radius: 3px;
 }
 
+
+.file_upload::-webkit-file-upload-button {
+    visibility: hidden;
+}
+
+.file_upload {
+    color: transparent;
+}
+
+
+.file_upload::before {
+    content: 'Dosya seç';
+    display: inline-block;
+    -webkit-user-select: none;
+    color: #475569 !important;
+    background-color: #ced4da;
+    max-width: 100%;
+    padding: 7px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.file_upload:hover::before {
+    border-color: black;
+}
+
+.fileupload_alert {
+    padding: 10px;
+    background-color: #60a5fa;
+    color: #fff;
+    margin-bottom: 10px;
+}
+
+.chat_image {
+    width: 100%;
+    height: 100%;
+    max-width: 400px;
+    max-height: 200px;
+}
+
+.author {
+    background-color: #eee;
+    display: inline;
+    padding: 5px;
+    border-radius: 5px;
+    border-top-left-radius: 0px !important;
+    border-bottom-left-radius: 0px !important;
+}
