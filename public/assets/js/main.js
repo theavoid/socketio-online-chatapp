@@ -26,7 +26,7 @@ message.addEventListener("keypress", function (key) {
     socket.on('chat', (data) => {
         let newmessage = document.createElement('div')
         newmessage.className = "message user"
-        newmessage.innerHTML = '<strong>'+ data.sender +':</strong> ' + data.message;
+        newmessage.innerText = '<strong>'+ data.sender +':</strong> ' + data.message;
         newmessage.style.backgroundColor = "#" + data.color
         document.getElementById('messages').appendChild(newmessage)
     })
