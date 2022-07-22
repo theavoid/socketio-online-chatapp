@@ -4,13 +4,15 @@ const socket = require("socket.io")
 const { uniqueNamesGenerator, adjectives } = require('unique-names-generator');
 const axios = require("axios")
 const mongoose = require("mongoose")
+const Bans = require("./models/bans.js")
+const Users = require("./models/users.js")
 const upload = require("express-fileupload")
 
 app.set('view engine', 'ejs')
 app.use(express.static("public"))
 app.use(upload())
 var server = app.listen(process.env.PORT || 1337, () => {
-    mongoose.connect(process.env.MONGO || "")
+    mongoose.connect(process.env.MONGO || "mongodb+srv://void:spfjkUCNgV1ZGrj1@chatapp.ge35sem.mongodb.net/onlinechat?retryWrites=true&w=majority")
     console.log("Sunucu başlatıldı.")
 })
 
@@ -57,7 +59,7 @@ app.post("/api/upload", (req, res) => {
             } else {
                 var name = '/uploads/' + file.md5
                 var newdata = {
-                    sender: 'photobot',
+                    sender: 'photobot-c267egd6y42wwsfsdgw',
                     message: `<img class="chat_image" onclick="window.open('/uploads/'+file.md5)" onerror="javascript:void(0)" height="250" style="margin-top: 20px; border-radius: 6px" src=${name}>`,
                     color: "#989c9f",
                     url: '/uploads/' + file.md5
